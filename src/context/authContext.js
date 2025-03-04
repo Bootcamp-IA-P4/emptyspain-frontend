@@ -40,8 +40,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleLogout = () => {
+    Cookies.remove("token");
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, handleLogin }}>
+    <AuthContext.Provider value={{ user, loading, handleLogin, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );
