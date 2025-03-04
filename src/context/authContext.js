@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useState, useEffect, useContext } from "react";
+import Cookies from "js-cookie";
 import { login, getProfile } from "@/services/authService";
 
 const AuthContext = createContext();
@@ -9,20 +10,27 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getProfile()
-        .then(setUser)
-        .catch(() => localStorage.removeItem("token"));
-    }
-    setLoading(false);
+    const checkUser = async () => {
+      const token = Cookies.get("token");
+      if (token) {
+        try {
+          const userData = await getProfile();
+          setUser(userData);
+        } catch (error) {
+          console.error("Error obteniendo usuario:", error);
+          Cookies.remove("token"); // Si hay error, eliminamos el token
+        }
+      }
+      setLoading(false);
+    };
+
+    checkUser();
   }, []);
 
   const handleLogin = async (credentials) => {
     try {
       const data = await login(credentials);
       if (data.access) {
-        localStorage.setItem("token", data.access);
         const userData = await getProfile();
         setUser(userData);
       }
@@ -32,13 +40,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-  };
-
   return (
-    <AuthContext.Provider value={{ user, loading, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ user, loading, handleLogin }}>
       {children}
     </AuthContext.Provider>
   );

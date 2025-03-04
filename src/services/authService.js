@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -9,7 +10,7 @@ const api = axios.create({
 
 // Interceptor para incluir el token en cada solicitud
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = Cookies.get("token"); // Leer el token desde cookies
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -28,6 +29,7 @@ export const register = async (userData) => {
 export const login = async (credentials) => {
   try {
     const response = await api.post("/login/", credentials);
+    Cookies.set("token", response.data.access, { expires: 7 }); // Guardar en cookies con duración de 7 días
     return response.data;
   } catch (error) {
     throw error.response?.data || "Error en el login";
@@ -36,7 +38,13 @@ export const login = async (credentials) => {
 
 export const getProfile = async () => {
   try {
-    const response = await api.get("/profile/");
+    const token = Cookies.get("token"); // Obtener token de cookies
+    if (!token) throw "No hay token disponible";
+
+    const response = await api.get("/profile/", {
+      headers: { Authorization: `Bearer ${token}` }, // Enviar token manualmente
+    });
+
     return response.data;
   } catch (error) {
     throw error.response?.data || "Error obteniendo perfil";
