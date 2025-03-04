@@ -18,9 +18,10 @@ export default function Dashboard() {
   if (loading) return <p>Cargando...</p>;
 
   return (
-    <div>
-      <h1>Bienvenido al Dashboard</h1>
-      <p>Hola, {user?.username}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Aquí irá el listado de pueblos
+      </h2>
     </div>
   );
 }

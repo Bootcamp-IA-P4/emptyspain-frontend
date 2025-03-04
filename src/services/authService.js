@@ -22,6 +22,7 @@ export const register = async (userData) => {
     const response = await api.post("/register/", userData);
     return response.data;
   } catch (error) {
+    console.error("Error al registrar:", error.response?.data || error);
     throw error.response?.data || "Error en el registro";
   }
 };
