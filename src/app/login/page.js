@@ -20,17 +20,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Iniciar Sesión</h2>
-        <form onSubmit={onSubmit} className="flex flex-col">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Iniciar Sesión</h2>
+        <form onSubmit={onSubmit} className="flex flex-col gap-4">
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required
-            className="mb-2 p-2 border rounded"
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
@@ -38,11 +38,11 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
             required
-            className="mb-4 p-2 border rounded"
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            className="bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
             Iniciar Sesión
           </button>

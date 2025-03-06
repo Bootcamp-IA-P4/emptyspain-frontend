@@ -34,59 +34,60 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-        <form onSubmit={onSubmit} className="flex flex-col">
-          <input
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Registro</h2>
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+        <form onSubmit={onSubmit} className="flex flex-col gap-4">
+            <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required
-            className="mb-2 p-2 border rounded"
-          />
-          <input
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
             required
-            className="mb-2 p-2 border rounded"
-          />
-          <input
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required
-            className="mb-2 p-2 border rounded"
-          />
-          <input
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm Password"
             required
-            className="mb-2 p-2 border rounded"
-          />
-          <select
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <select
             value={tipoUsuario}
             onChange={(e) => setTipoUsuario(e.target.value)}
-            className="mb-4 p-2 border rounded"
-          >
+            required
+            className="p-3 border border-gray-400 rounded text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
             <option value="visualizador">Visualizador</option>
             <option value="editor">Editor</option>
-          </select>
-          <button
+            </select>
+            <button
             type="submit"
-            className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-          >
+            className="bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
             Registrarse
-          </button>
+            </button>
         </form>
-      </div>
+        </div>
     </div>
-  );
+    );
 }
