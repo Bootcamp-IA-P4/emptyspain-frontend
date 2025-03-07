@@ -6,7 +6,8 @@ import { HomeIcon } from "@heroicons/react/solid";
 export default function Navbar() {
   const { user, handleLogout } = useAuth();
 
-  const linkClasses = "text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md";
+  const linkClasses =
+    "text-white hover:text-gray-300 transition-colors px-3 py-2 rounded-md";
 
   return (
     <nav className="flex items-center justify-between p-4 bg-gray-800 shadow-md">
@@ -20,6 +21,10 @@ export default function Navbar() {
         <Link href="/" className={linkClasses}>
           Home
         </Link>
+        <Link href="/dashboard" className={linkClasses}>
+          Pueblos
+        </Link>
+
         {!user ? (
           <>
             <Link href="/login" className={linkClasses}>

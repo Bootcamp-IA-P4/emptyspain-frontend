@@ -13,16 +13,6 @@ export default function Dashboard() {
   const router = useRouter();
   const [pueblos, setPueblos] = useState([]);
   const [favorites, setFavorites] = useState({});
-  const [newPueblo, setNewPueblo] = useState({
-    nombre: "",
-    provincia: "",
-    comunidad_autonoma: "",
-    poblacion: "",
-    superficie_km2: "",
-    densidad_poblacion: "",
-    codigo_ine: "",
-    clasificacion_zona: "",
-  });
 
   // Estado para mostrar el mensaje de éxito
   const [successMessage, setSuccessMessage] = useState("");
