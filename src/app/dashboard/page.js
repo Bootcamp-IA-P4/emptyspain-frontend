@@ -2,15 +2,30 @@
 import { useAuth } from "../../context/authContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getPueblos } from "../../services/api";
-import { HeartIcon as HeartOutline } from '@heroicons/react/outline';
-import { HeartIcon as HeartSolid } from '@heroicons/react/solid';
+import { getPueblos, addPueblo } from "../../services/api";
+// import { HeartIcon as HeartOutline } from "@heroicons/react/outline";
+// import { HeartIcon as HeartSolid } from "@heroicons/react/solid";
+import TownForm from "../components/TownForm";
+import TownCard from "../components/TownCard";
 
 export default function Dashboard() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [pueblos, setPueblos] = useState([]);
   const [favorites, setFavorites] = useState({});
+  const [newPueblo, setNewPueblo] = useState({
+    nombre: "",
+    provincia: "",
+    comunidad_autonoma: "",
+    poblacion: "",
+    superficie_km2: "",
+    densidad_poblacion: "",
+    codigo_ine: "",
+    clasificacion_zona: "",
+  });
+
+  // Estado para mostrar el mensaje de éxito
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (!loading && !user) {
@@ -41,48 +56,30 @@ export default function Dashboard() {
       <h2 className="text-4xl font-bold text-center mb-8 text-indigo-600">
         Listado de Pueblos
       </h2>
+
+      {/* Mostrar mensaje de éxito */}
+      {successMessage && (
+        <div className="bg-green-500 text-white p-4 rounded-lg text-center mb-6">
+          {successMessage}
+        </div>
+      )}
+
+      {user?.tipo_usuario === "editor" && (
+        <TownForm
+          setSuccessMessage={setSuccessMessage}
+          setPueblos={setPueblos}
+        />
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pueblos.map((pueblo) => (
-          <div
+          <TownCard
             key={pueblo.id}
-            className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 relative"
-          >
-            <h3 className="text-xl font-semibold text-indigo-600 mb-2">
-              {pueblo.nombre}
-            </h3>
-            <p className="text-gray-700 mb-1">
-              <strong>Provincia:</strong> {pueblo.provincia}
-            </p>
-            <p className="text-gray-700 mb-1">
-              <strong>Comunidad Autónoma:</strong> {pueblo.comunidad_autonoma}
-            </p>
-            <p className="text-gray-700 mb-1">
-              <strong>Población:</strong> {pueblo.poblacion}
-            </p>
-            <p className="text-gray-700 mb-1">
-              <strong>Superficie (km²):</strong> {pueblo.superficie_km2}
-            </p>
-            <p className="text-gray-700 mb-1">
-              <strong>Densidad de Población:</strong> {pueblo.densidad_poblacion}
-            </p>
-            <p className="text-gray-700 mb-1">
-              <strong>Código INE:</strong> {pueblo.codigo_ine}
-            </p>
-            <p className="text-gray-700">
-              <strong>Clasificación de Zona:</strong>{" "}
-              {pueblo.clasificacion_zona}
-            </p>
-            <button
-              onClick={() => toggleFavorite(pueblo.id)}
-              className="absolute top-4 right-4"
-            >
-              {favorites[pueblo.id] ? (
-                <HeartSolid className="h-6 w-6 text-red-500" />
-              ) : (
-                <HeartOutline className="h-6 w-6 text-gray-500 hover:text-red-500" />
-              )}
-            </button>
-          </div>
+            pueblo={pueblo}
+            toggleFavorite={toggleFavorite}
+            favorite={favorites[pueblo.id]}
+            user={user}
+          />
         ))}
       </div>
     </div>
