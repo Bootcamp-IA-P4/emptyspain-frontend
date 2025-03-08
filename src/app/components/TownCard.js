@@ -1,7 +1,12 @@
 import { HeartIcon as HeartOutline } from "@heroicons/react/outline";
 import { HeartIcon as HeartSolid } from "@heroicons/react/solid";
 
-export default function TownCard({ pueblo, toggleFavorite, favorite, user }) {
+export default function TownCard({
+  pueblo,
+  onFavoriteToggle,
+  isFavorite,
+  user,
+}) {
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 relative h-full">
       <h3 className="text-xl font-semibold text-indigo-600 mb-2">
@@ -23,10 +28,10 @@ export default function TownCard({ pueblo, toggleFavorite, favorite, user }) {
 
       {user?.tipo_usuario === "visualizador" && (
         <button
-          onClick={() => toggleFavorite(pueblo.id)}
+          onClick={() => onFavoriteToggle(pueblo.id)}
           className="absolute top-4 right-4"
         >
-          {favorite ? (
+          {isFavorite ? (
             <HeartSolid className="h-6 w-6 text-red-500" />
           ) : (
             <HeartOutline className="h-6 w-6 text-gray-500 hover:text-red-500" />
