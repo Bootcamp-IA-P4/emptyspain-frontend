@@ -12,12 +12,9 @@ export default function TownsList() {
   const [pueblos, setPueblos] = useState([]);
   const [favorites, setFavorites] = useState({});
 
-  // Estado para mostrar el mensaje de éxito
-  const [successMessage, setSuccessMessage] = useState("");
-
   useEffect(() => {
     if (!loading && !user) {
-      router.push("/login");
+      router.push("/");
     }
   }, [user, loading, router]);
 
@@ -30,17 +27,6 @@ export default function TownsList() {
     fetchPueblos();
   }, []);
 
-  const toggleFavorite = (id) => {
-    setFavorites((prevFavorites) => ({
-      ...prevFavorites,
-      [id]: !prevFavorites[id],
-    }));
-  };
-
-  const handleTownClick = (id) => {
-    router.push(`/towns/${id}`);
-  };
-
   if (loading) return <p>Cargando...</p>;
 
   return (
@@ -49,30 +35,17 @@ export default function TownsList() {
         Listado de Pueblos
       </h2>
 
-      {/* Mostrar mensaje de éxito */}
-      {successMessage && (
-        <div className="bg-green-500 text-white p-4 rounded-lg text-center mb-6">
-          {successMessage}
-        </div>
-      )}
-
-      {user?.tipo_usuario === "editor" && (
-        <TownForm
-          setSuccessMessage={setSuccessMessage}
-          setPueblos={setPueblos}
-        />
-      )}
+      {user?.tipo_usuario === "editor" && <TownForm setPueblos={setPueblos} />}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pueblos.map((pueblo) => (
           <div
             key={pueblo.id}
-            onClick={() => handleTownClick(pueblo.id)}
+            onClick={() => router.push(`/towns/${pueblo.id}`)}
             className="cursor-pointer"
           >
             <TownCard
               pueblo={pueblo}
-              toggleFavorite={toggleFavorite}
               favorite={favorites[pueblo.id]}
               user={user}
             />

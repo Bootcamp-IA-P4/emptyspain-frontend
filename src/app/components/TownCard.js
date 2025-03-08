@@ -3,7 +3,7 @@ import { HeartIcon as HeartSolid } from "@heroicons/react/solid";
 
 export default function TownCard({ pueblo, toggleFavorite, favorite, user }) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 relative">
+    <div className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 relative h-full">
       <h3 className="text-xl font-semibold text-indigo-600 mb-2">
         {pueblo.nombre}
       </h3>
@@ -16,15 +16,7 @@ export default function TownCard({ pueblo, toggleFavorite, favorite, user }) {
       <p className="text-gray-700 mb-1">
         <strong>Población:</strong> {pueblo.poblacion}
       </p>
-      <p className="text-gray-700 mb-1">
-        <strong>Superficie (km²):</strong> {pueblo.superficie_km2}
-      </p>
-      <p className="text-gray-700 mb-1">
-        <strong>Densidad de Población:</strong> {pueblo.densidad_poblacion}
-      </p>
-      <p className="text-gray-700 mb-1">
-        <strong>Código INE:</strong> {pueblo.codigo_ine}
-      </p>
+
       <p className="text-gray-700">
         <strong>Clasificación de Zona:</strong> {pueblo.clasificacion_zona}
       </p>

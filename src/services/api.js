@@ -45,6 +45,6 @@ export const getPuebloGaleria = async (id) => {
     return response.data;
   } catch (error) {
     console.error(`Error fetching gallery for pueblo with ID ${id}:`, error);
-    return [];
+    return null;
   }
 };

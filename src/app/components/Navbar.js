@@ -21,9 +21,11 @@ export default function Navbar() {
         <Link href="/" className={linkClasses}>
           Home
         </Link>
-        <Link href="/towns" className={linkClasses}>
-          Pueblos
-        </Link>
+        {user && (
+          <Link href="/towns" className={linkClasses}>
+            Pueblos
+          </Link>
+        )}
 
         {!user ? (
           <>
