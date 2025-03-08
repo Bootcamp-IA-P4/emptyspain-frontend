@@ -42,7 +42,12 @@ export default function TownsList() {
     await toggleFavorito(user.id, puebloId);
   };
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading)
+    return (
+      <p className="text-center text-lg text-gray-600 mt-20 animate-pulse">
+        Cargando...
+      </p>
+    );
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">

@@ -29,7 +29,12 @@ export default function TownDetail() {
     fetchData();
   }, [id]);
 
-  if (loading || !pueblo) return <p>Cargando...</p>;
+  if (loading || !pueblo)
+    return (
+      <p className="text-center text-lg text-gray-600 mt-20 animate-pulse">
+        Cargando...
+      </p>
+    );
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
