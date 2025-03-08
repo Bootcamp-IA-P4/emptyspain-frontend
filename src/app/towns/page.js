@@ -54,13 +54,18 @@ export default function TownsList() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pueblos.map((pueblo) => (
-          <TownCard
+          <div
             key={pueblo.id}
-            pueblo={pueblo}
-            isFavorite={favoritos.has(pueblo.id)}
-            onFavoriteToggle={handleFavoriteToggle}
-            user={user}
-          />
+            onClick={() => router.push(`/towns/${pueblo.id}`)}
+            className="cursor-pointer"
+          >
+            <TownCard
+              pueblo={pueblo}
+              isFavorite={favoritos.has(pueblo.id)}
+              onFavoriteToggle={handleFavoriteToggle}
+              user={user}
+            />
+          </div>
         ))}
       </div>
     </div>

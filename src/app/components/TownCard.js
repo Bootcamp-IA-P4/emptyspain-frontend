@@ -28,7 +28,10 @@ export default function TownCard({
 
       {user?.tipo_usuario === "visualizador" && (
         <button
-          onClick={() => onFavoriteToggle(pueblo.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onFavoriteToggle(pueblo.id);
+          }}
           className="absolute top-4 right-4"
         >
           {isFavorite ? (
