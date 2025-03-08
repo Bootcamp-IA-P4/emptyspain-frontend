@@ -2,13 +2,11 @@
 import { useAuth } from "../../context/authContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getPueblos, addPueblo } from "../../services/api";
-// import { HeartIcon as HeartOutline } from "@heroicons/react/outline";
-// import { HeartIcon as HeartSolid } from "@heroicons/react/solid";
+import { getPueblos } from "../../services/api";
 import TownForm from "../components/TownForm";
 import TownCard from "../components/TownCard";
 
-export default function Dashboard() {
+export default function TownsList() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [pueblos, setPueblos] = useState([]);
@@ -39,6 +37,10 @@ export default function Dashboard() {
     }));
   };
 
+  const handleTownClick = (id) => {
+    router.push(`/towns/${id}`);
+  };
+
   if (loading) return <p>Cargando...</p>;
 
   return (
@@ -63,13 +65,18 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pueblos.map((pueblo) => (
-          <TownCard
+          <div
             key={pueblo.id}
-            pueblo={pueblo}
-            toggleFavorite={toggleFavorite}
-            favorite={favorites[pueblo.id]}
-            user={user}
-          />
+            onClick={() => handleTownClick(pueblo.id)}
+            className="cursor-pointer"
+          >
+            <TownCard
+              pueblo={pueblo}
+              toggleFavorite={toggleFavorite}
+              favorite={favorites[pueblo.id]}
+              user={user}
+            />
+          </div>
         ))}
       </div>
     </div>

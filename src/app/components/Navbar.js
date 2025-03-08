@@ -21,7 +21,7 @@ export default function Navbar() {
         <Link href="/" className={linkClasses}>
           Home
         </Link>
-        <Link href="/dashboard" className={linkClasses}>
+        <Link href="/towns" className={linkClasses}>
           Pueblos
         </Link>
 

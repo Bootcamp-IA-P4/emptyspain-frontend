@@ -7,7 +7,7 @@ export default function Home() {
   const { user, loading } = useAuth();
 
   const handleRedirect = () => {
-    router.push("/dashboard");
+    router.push("/towns");
   };
 
   if (loading) {
@@ -30,7 +30,7 @@ export default function Home() {
             onClick={handleRedirect}
             className="bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition-colors mb-4"
           >
-            Ir al Dashboard
+            Ver pueblos
           </button>
         </div>
       ) : (
