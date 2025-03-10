@@ -13,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
     const data = await handleLogin({ email, password });
     if (data.access) {
-      router.push("/dashboard");
+      router.push("/towns");
     } else {
       alert("Error en login");
     }
