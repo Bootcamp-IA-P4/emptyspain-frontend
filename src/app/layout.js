@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "La españa vacía",
+  title: "La españa vaciada",
   description: "",
 };
 
