@@ -11,6 +11,7 @@ export default function TownsList() {
   const router = useRouter();
   const [pueblos, setPueblos] = useState([]);
   const [favoritos, setFavoritos] = useState(new Set());
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (!loading && !user) {
@@ -54,8 +55,19 @@ export default function TownsList() {
       <h2 className="text-4xl font-bold text-center mb-8 text-indigo-600">
         Listado de Pueblos
       </h2>
+      {/* Mostrar mensaje de éxito */}
+      {successMessage && (
+        <div className="bg-green-500 text-white p-4 rounded-lg text-center mb-6">
+          {successMessage}
+        </div>
+      )}
 
-      {user?.tipo_usuario === "editor" && <TownForm setPueblos={setPueblos} />}
+      {user?.tipo_usuario === "editor" && (
+        <TownForm
+          setSuccessMessage={setSuccessMessage}
+          setPueblos={setPueblos}
+        />
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pueblos.map((pueblo) => (
