@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const API_PUEBLOS = "http://localhost:8000/api/pueblos/";
-const API_GALERIA = "http://localhost:8000/api/galeria-fotos/";
-const API_FAVORITOS = "http://localhost:8000/api/favoritos/";
+const API_PUEBLOS =
+  "https://crud-emptyspain-server-main.onrender.com/api/pueblos/";
+const API_GALERIA =
+  "https://crud-emptyspain-server-main.onrender.com/api/galeria-fotos/";
+const API_FAVORITOS =
+  "https://crud-emptyspain-server-main.onrender.com/api/favoritos/";
 
 export const getPueblos = async () => {
   try {
